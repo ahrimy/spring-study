@@ -8,30 +8,33 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HelloController {
-    @GetMapping("hello")
+
+    @GetMapping("hello") // url path
     public String hello(Model model){
         model.addAttribute("data", "hello!!");
-        return "hello";
+        return "hello"; //name of view file
     }
+
     @GetMapping("hello-mvc")
-    public String helloMvc(@RequestParam(value="name", required = true) String name, Model model){
-        model.addAttribute("name",name);
-        return "hello-template";
+    public String helloMvc(@RequestParam("name") String name, Model model){
+        model.addAttribute("name", name);
+        return "hello-template"; // View Resolver 가 동작함
     }
+
     @GetMapping("hello-string")
-    @ResponseBody
+    @ResponseBody  // HTTPMessageConverter 가 동작함 (String Converter)
     public String helloString(@RequestParam("name") String name){
         return "hello " + name;
     }
 
     @GetMapping("hello-api")
-    @ResponseBody
-    public Hello helloAPI(@RequestParam("name") String name){
+    @ResponseBody  // HTTPMessageConverter 가 동작함 (JSON Converter)
+    public Hello helloApi(@RequestParam("name") String name) {
         Hello hello = new Hello();
         hello.setName(name);
         return hello;
     }
-    static class Hello{
+    static class Hello {
         private String name;
 
         public String getName() {
