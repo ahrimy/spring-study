@@ -1,5 +1,5 @@
 # Spring study
-spring 학습 내용 및 코드 정리
+spring 학습 내용
 > [Wiki](https://github.com/ahrimy/spring-study/wiki)
 
 # Contents
