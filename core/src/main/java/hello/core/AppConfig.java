@@ -18,20 +18,28 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class AppConfig {
+    // @Bean memberService -> new MemoryMemberRepository()
+    // @Bean orderService -> new MemoryMemberRepository()
+    // MemoryMemberRepository 가 두번 생성된다 -> 싱글톤 깨지나?
+    // => 안깨진다. ConfigurationSingletonTest 확인
+    // 왜?
 
     // 각각의 역할과 구현 클래스가 한눈에 보임
     @Bean // Bean : Spring Container 에 등록이 됨, method 이름으로 등록됨
     public MemberService memberService() {
+//        System.out.println("AppConfig.memberService");
         return new MemberServiceImpl(memberRepository());
     }
 
     @Bean
     public MemberRepository memberRepository() {
+//        System.out.println("AppConfig.memberRepository");
         return new MemoryMemberRepository();
     }
 
     @Bean
     public OrderService orderService() {
+//        System.out.println("AppConfig.orderService");
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
