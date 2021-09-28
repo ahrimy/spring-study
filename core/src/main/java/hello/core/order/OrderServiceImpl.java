@@ -6,7 +6,10 @@ import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderServiceImpl implements OrderService{
 
     private final MemberRepository memberRepository;
@@ -18,6 +21,7 @@ public class OrderServiceImpl implements OrderService{
     private final DiscountPolicy discountPolicy; // 이렇게 하면 Interface 에만 의존할 수 있다
 
     // 이렇게 구현하면 MemberRepository, DiscountPolicy interface 에만 의존한다.
+    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
