@@ -25,12 +25,20 @@ public class OrderServiceImpl implements OrderService{
     // private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
     // private final DiscountPolicy discountPolicy = new RateDiscountPolicy(); // 이런 코드는 DIP, OCP 위반
 
-    @Autowired
+//    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         // 이렇게 구현하면 MemberRepository, DiscountPolicy interface 에만 의존한다.
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
+
+    // 생성자 주입을 사용해야되는 이유
+    // final 사용 가능
+    // 불변
+    // 누락된 부분 바로 확인 가능
+    // 누락된 경우 컴파일 과정에서 확인 가능
+    // 프레임워크에 의존하지 않고, 순수한 자바 언어의 특징을 잘 살리는 방법
+    // 가끔 옵션이 필요할때만 수정자 주입
 
     // 다양한 의존 관계 주입 방법 2 : 수정자 주입
     // setter 를 사용해서 주입
