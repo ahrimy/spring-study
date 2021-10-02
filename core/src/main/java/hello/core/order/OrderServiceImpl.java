@@ -1,5 +1,6 @@
 package hello.core.order;
 
+import hello.core.annotation.MainDiscountPolicy;
 import hello.core.discount.DiscountPolicy;
 import hello.core.discount.FixDiscountPolicy;
 import hello.core.discount.RateDiscountPolicy;
@@ -35,7 +36,7 @@ public class OrderServiceImpl implements OrderService{
     // @Primary 가 우선순위
     // Primary 랑 Qualifier 중에서는 Qualifier 가 우선순위가 높다
 //    @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    public OrderServiceImpl(MemberRepository memberRepository, @MainDiscountPolicy DiscountPolicy discountPolicy) {
         // 이렇게 구현하면 MemberRepository, DiscountPolicy interface 에만 의존한다.
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
