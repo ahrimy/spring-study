@@ -6,10 +6,12 @@ import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor // 이렇게 쓰면 final 붙은 필드를 모아서 생성자를 만들어줌 -> 코드가 간결해진다
 public class OrderServiceImpl implements OrderService{
 
     // 다양한 의존 관계 주입 방법 1 : 생성자 주입
@@ -26,11 +28,13 @@ public class OrderServiceImpl implements OrderService{
     // private final DiscountPolicy discountPolicy = new RateDiscountPolicy(); // 이런 코드는 DIP, OCP 위반
 
 //    @Autowired
+    /*
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         // 이렇게 구현하면 MemberRepository, DiscountPolicy interface 에만 의존한다.
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
+    */
 
     // 생성자 주입을 사용해야되는 이유
     // final 사용 가능
