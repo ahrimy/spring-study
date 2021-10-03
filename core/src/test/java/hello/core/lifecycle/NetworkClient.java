@@ -3,6 +3,9 @@ package hello.core.lifecycle;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 // 초기화, 소멸 인터페이스
 // 단점
 // 스프링 전용 인터페이스이다. 해당 코드가 스프링 전용 인터페이스에 의존한다.
@@ -37,12 +40,16 @@ public class NetworkClient {
     public void disconnect() {
         System.out.println("close: " + url);
     }
-
+    // @PostConstruct, @PreDestroy : 최신 스프링에서 가장 권장하는 방법
+    // 외부 라이브러리에는 적용하지 못한다.
+    // 그때는  @Bean 의 기능을 사용해야한다.
+    @PostConstruct
     public void init() {
         System.out.println("NetworkClient.init");
         connect();
         call("초기화 연결 메시지");
     }
+    @PreDestroy
     public void close() {
         System.out.println("NetworkClient.close");
         disconnect();
