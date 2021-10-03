@@ -1,3 +1,6 @@
+# h2 db
+*.mv.db
+
 # Compiled class file
 *.class
 
