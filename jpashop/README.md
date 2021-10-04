@@ -17,3 +17,12 @@
   - 상품의 종류는 도서, 음반, 영화가 있다.
   - 상품을 카테고리로 구분할 수 있다.
   - 상품 주문시 배송 정보를 입력할 수 있다.
+
+## 도메인 모델과 테이블 설계
+![도메인 모델과 테이블 설계](https://user-images.githubusercontent.com/26592306/135854428-05729dc2-9b4f-4a4b-8f4d-87eacd037586.png)
+
+## 엔티티 분석
+![엔티티 분석](https://user-images.githubusercontent.com/26592306/135854439-525655eb-4290-42a7-8d96-bf221be47222.png)
+
+## 테이블 분석
+![테이블 분석](https://user-images.githubusercontent.com/26592306/135854450-f9e4916c-8472-427b-9b2c-badeb6a89255.png)
