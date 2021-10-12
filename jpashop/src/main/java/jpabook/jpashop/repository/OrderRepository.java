@@ -69,6 +69,30 @@ public class OrderRepository {
         ).getResultList();
     }
 
+    public List<Order> findAllWithItem() {
+        // 이렇게 하면 orderItems 개수만큼 데이터가 생긴다...
+        // distinct 넣으면 해결 가능!
+        // JPA 의 distinct 는 DB의 distinct + root Entity 가 중복인 경우 중복을 거른다.
+        // 근데 fetch join 하면 페이징 불가 -> memory 에서 페이징을 한다. -> 말도안됨
+        return em.createQuery(
+                "select distinct o from Order o" +
+                        " join fetch o.member m" +
+                        " join fetch o.delivery d" +
+                        " join fetch o.orderItems oi" +
+                        " join fetch oi.item i", Order.class)
+                .getResultList();
+    }
+
+    public List<Order> findAllWithMemberDelivery(int offset, int limit) {
+        return em.createQuery(
+                "select o from Order o" +
+                        " join fetch o.member m" +
+                        " join fetch o.delivery d", Order.class)
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
+    }
+
     // repository 에 API 스펙이 들어와있다 -> 이건 의도랑 맞지 않는다.
     // repository 는 Entity 를 조회하는 용도 => OrderSimpleQueryRepository 에 따로 구현한다.
 //    public List<OrderSimpleQueryDto> findOrderDtos() {
