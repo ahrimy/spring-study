@@ -22,6 +22,10 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
 
+    // Lazy : DB 에서 안가져온다 -> hibernate 가 ProxyMember를 생성한다 (ByteBuddyInterceptor)
+    // jackson 라이브러리가 읽어올 수가 없다.
+    // hibernate5module 사용해서 해결할 수 있음
+    // 근데 Entity 직접 노출하는건 좋지 않기 때문에 이 방법은 쓸일이 없음
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;

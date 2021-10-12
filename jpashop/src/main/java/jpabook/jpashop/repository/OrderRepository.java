@@ -2,6 +2,7 @@ package jpabook.jpashop.repository;
 
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderSearch;
+import jpabook.jpashop.repository.order.simplequery.OrderSimpleQueryDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
@@ -58,4 +59,26 @@ public class OrderRepository {
         return query.getResultList();
     }
 
+    public List<Order> findAllWithMemberDelivery() {
+        // fetch join
+        // 재사용 가능
+        return em.createQuery(
+                "select o from Order o" +
+                        " join fetch o.member m" +
+                        " join fetch o.delivery d", Order.class
+        ).getResultList();
+    }
+
+    // repository 에 API 스펙이 들어와있다 -> 이건 의도랑 맞지 않는다.
+    // repository 는 Entity 를 조회하는 용도 => OrderSimpleQueryRepository 에 따로 구현한다.
+//    public List<OrderSimpleQueryDto> findOrderDtos() {
+//        // sql 처럼 원하는 값을 선택해서 조회
+//        // 재사용 X
+//        return em.createQuery(
+//                        "select new jpabook.jpashop.repository.OrderSimpleQueryDto(o.id, m.name, o.orderDate, o.status, d.address)" +
+//                                " from Order o" +
+//                                " join o.member m" +
+//                                " join o.delivery d", OrderSimpleQueryDto.class)
+//                .getResultList();
+//    }
 }
