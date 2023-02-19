@@ -1,9 +1,8 @@
 package jpabook.jpashop.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Member {
@@ -15,6 +14,10 @@ public class Member {
     private String name;
     private String city;
     private String street;
+
+    // 이 연관관계는 꼭 필요하지 않다. 예제니까 추가
+    @OneToMany(mappedBy = "member")
+    private List<Order> orders = new ArrayList<>(); // NPE 방지하는 등 관례적으로 초기값 설정
 
     public Long getId() {
         return id;
